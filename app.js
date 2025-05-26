@@ -5,16 +5,26 @@ const del=document.getElementsByClassName("del");
 const done=document.getElementsByClassName("done");
 
 const wo=[];
+const che=[];
 let i=1;
+const saved = localStorage.getItem("wo");
+const cheSaved=localStorage.getItem("che");
+if (saved) {
+    wo.push(...JSON.parse(saved));
+    che.push(...JSON.parse(cheSaved));
+    show();
+}
 
 function addWork(){
     wo.push(inp.value);
+    che.push("false");
     inp.value="";
     show();
 }
 
 function deleteWork(i){
     wo.splice(i,1);
+    che.splice(i,1);
     console.log(i);
     show();
 }
@@ -22,14 +32,17 @@ function deleteWork(i){
 function workDone(i){
     const temp=document.getElementById(`p-${i}`);
     temp.style.textDecoration="line-through";
-    temp.style.opacity="0.5"
+    temp.style.opacity="0.5";
+    che[i]=true;
     
 }
 
 function workUndo(i){
     const temp=document.getElementById(`p-${i}`);
-    temp.style.textDecoration="none"
-    temp.style.opacity="1"
+    temp.style.textDecoration="none";
+    temp.style.opacity="1";
+    che[i]=false;
+
 }
 
 function show(){
@@ -43,6 +56,12 @@ function show(){
             </div>
             <button class="del" id="${i}">X</button>
           </div>`;
+        const temp=document.getElementById(`p-${i}`);
+        if (che[i]==true){
+            temp.style.textDecoration="line-through";
+            temp.style.opacity="0.5";
+        }
+        
     }
 
     for (let btn of del){
@@ -61,6 +80,8 @@ function show(){
             }
         })
     }
+    localStorage.setItem('wo', JSON.stringify(wo));
+    localStorage.setItem('che', JSON.stringify(che));
 }
 
 add.addEventListener("click",addWork);
