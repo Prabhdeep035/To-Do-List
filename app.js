@@ -86,7 +86,7 @@ function show(){
 
 add.addEventListener("click",addWork);
 inp.addEventListener("keydown",function(e){
-    if(e.key==='Enter'){
+    if(e.key==='Enter' && inp.value.trim()!=""){
         addWork();
     }
 })
