@@ -66,6 +66,7 @@ body{
     border-radius: 30px;
     background-color: #BFB48F;
     overflow-y: scroll;
+    /* overflow: hidden; */
 }
 
 #to-do{
