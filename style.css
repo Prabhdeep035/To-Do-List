@@ -130,5 +130,7 @@ body{
     #to-do{
         width: 18rem;
     }
-    
+    .para{
+        font-size: 1.1rem;
+    }
 }
